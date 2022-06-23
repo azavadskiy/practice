@@ -1,14 +1,30 @@
 name: Build and Push Release
 
-on: push
-name: Slack Notification Demo
+on: [push]
+
 jobs:
-  slackNotification:
-    name: Slack Notification
+  build-and-push-release:
+    name: Build docker container
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Slack Notification
-      uses: rtCamp/action-slack-notify@v2
-      env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Send custom JSON data to Slack workflow
+        id: slack
+        uses: slackapi/slack-github-action@v1.18.0
+        with:
+          # For posting a rich message using Block Kit
+          payload: |
+            {
+              "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
