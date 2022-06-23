@@ -1,18 +1,14 @@
 name: Build and Push Release
 
-on: [push]
-
+on: push
+name: Slack Notification Demo
 jobs:
-  build-and-push-release:
-    name: Build docker container
+  slackNotification:
+    name: Slack Notification
     runs-on: ubuntu-latest
     steps:
-      - name: Slack notification
-  env:
-    SLACK_WEBHOOK: https://hooks.slack.com/services/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
-    SLACK_USERNAME: ThisIsMyUsername # Optional. (defaults to webhook app)
-    SLACK_CHANNEL: general # Optional. (defaults to webhook)
-    SLACK_AVATAR: repository # Optional. can be (repository, sender, an URL) (defaults to webhook app avatar)
-  uses: Ilshidur/action-slack@2.0.2
-  with:
-    args: 'A new commit has been pushed.' # Optional
+    - uses: actions/checkout@v2
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
