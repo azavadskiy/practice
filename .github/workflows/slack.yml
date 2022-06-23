@@ -14,7 +14,7 @@ jobs:
           # For posting a rich message using Block Kit
           payload: |
             {
-              "text": "",
+              "text": "dsd",
               "blocks": [
                 {
                   "type": "section",
