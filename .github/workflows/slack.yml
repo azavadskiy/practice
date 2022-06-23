@@ -26,7 +26,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ":pray:  *Deployment to staging environment started by ${{ github.actor }} please stand by* \n>_*Branch:*_ ${{ github.ref_name }} ({{ steps.prepare.outputs.sha }})"
+                    "text": ":pray:  *Deployment to staging environment started by ${{ github.actor }} please stand by* \n>_*Branch:*_ ${{ github.ref_name }} (${{ steps.prepare.outputs.sha }})"
                   }
                 }
               ]
