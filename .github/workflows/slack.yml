@@ -11,7 +11,8 @@ jobs:
         id: new
         run: |
           SHA=$(echo $GITHUB_SHA | head -c7)
-          echo ::set-output name=sha::${SHA}
+          COMITID_SHORT=$(git rev-parse --short HEAD)
+          
   
       - name: Send custom JSON data to Slack workflow
         id: slack
@@ -26,7 +27,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ":pray:  *Deployment to staging environment started by ${{ github.actor }} please stand by* \n>_*Branch:*_ ${{ github.ref_name }} (<{{ steps.prepare.outputs.sha }}|*$COMITID_SHORT*>)"
+                    "text": ":pray:  *Deployment to staging environment started by ${{ github.actor }} please stand by* \n>_*Branch:*_ ${{ github.ref_name }} *$COMITID_SHORT*)"
                   }
                 }
               ]
