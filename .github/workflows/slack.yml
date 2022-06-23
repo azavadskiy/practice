@@ -7,13 +7,11 @@ jobs:
     name: Build docker container
     runs-on: ubuntu-latest
     steps:
-      - name: Prepare
+      - name: prepare
         id: new
         run: |
           SHA=$(echo $GITHUB_SHA | head -c7)
-          GITHUB_REF_NAME=(echo $GITHUB_REF_NAME)
           echo ::set-output name=sha::${SHA}
-          echo ::set-output name=refname::${GITHUB_REF_NAME}    
   
       - name: Send custom JSON data to Slack workflow
         id: slack
@@ -28,7 +26,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ":pray:  *Deployment to staging environment started by ${{ github.actor }} please stand by* \n>Branch: $GITHUB_REF_NAME <${{ github.sha }}|*commit*>"
+                    "text": ":pray:  *Deployment to staging environment started by ${{ github.actor }} please stand by* \n>Branch: ${{ github.ref_name }} <${{ steps.prepare.outputs.sha }}|*commit*>"
                   }
                 }
               ]
