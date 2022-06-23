@@ -20,7 +20,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ":pray:  *Deployment to staging environment started by $GITHUB_ACTOR, please stand by* \n>Branch: \`$GITHUB_REF_NAME\` (<$(git rev-parse --short HEAD)|*commit*>)}"
+                    "text": "*Deployment to staging environment started by $GITHUB_ACTOR, please stand by* \n>Branch: \`$GITHUB_REF_NAME\` (<$(git rev-parse --short HEAD)|*commit*>)}"
                   }
                 }
               ]
