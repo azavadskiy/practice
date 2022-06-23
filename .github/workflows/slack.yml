@@ -11,10 +11,8 @@ jobs:
         id: new
         run: |
           SHA=$(echo $GITHUB_SHA | head -c7)
-          GITHUB_ACTOR =$(echo $GITHUB_ACTOR)
           GITHUB_REF_NAME=(echo $GITHUB_REF_NAME)
           echo ::set-output name=sha::${SHA}
-          echo ::set-output actor=actor::${GITHUB_ACTOR}
           echo ::set-output refname=refname::${GITHUB_REF_NAME}    
   
       - name: Send custom JSON data to Slack workflow
