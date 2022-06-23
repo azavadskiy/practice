@@ -1,0 +1,30 @@
+name: Build and Push Release
+
+on: [push]
+
+jobs:
+  build-and-push-release:
+    name: Build docker container
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send notification data to Slack
+        id: slack
+        uses: slackapi/slack-github-action@v1.18.0
+        with:
+          # For posting a rich message using Block Kit
+          payload: |
+            {
+              "text": "",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":pray:  *Deployment to staging environment started by $GITHUB_ACTOR, please stand by* \n>Branch: \`$GITHUB_REF_NAME\` (<$(git rev-parse --short HEAD)|*commit*>)}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
